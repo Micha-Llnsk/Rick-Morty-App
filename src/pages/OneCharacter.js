@@ -25,7 +25,7 @@ export default function OneCharacter() {
       return "Loading...";
     }
 
-    const { name, image, status, species, gender, origin, location } =
+    const { name, image, status, species, type, gender, origin, location } =
       character;
 
     return (
@@ -34,6 +34,7 @@ export default function OneCharacter() {
         <img src={image} alt={name} />
         <p>Status: {status}</p>
         <p>Species: {species}</p>
+        <p>Type: {type}</p>
         <p>Gender: {gender}</p>
         <p>Origin: {origin?.name}</p>
         <p>Location: {location?.name}</p>
