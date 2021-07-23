@@ -1,0 +1,23 @@
+.char__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 8px;
+  border: 3px #04b1c5 double;
+  padding: 1em;
+  margin: 1rem;
+}
+
+.backButton {
+  all: unset;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.75em 1.25em;
+  background: #dc0e59;
+  color: honeydew;
+  border: 5px solid #8c1d3e;
+}
+
+.backButton:active {
+  opacity: 0.7;
+}
