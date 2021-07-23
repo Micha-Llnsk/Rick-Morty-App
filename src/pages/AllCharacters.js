@@ -1,9 +1,11 @@
+import "./OneCharacter.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function AllCharacters() {
   const url = "https://rickandmortyapi.com/api/character";
   const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(2);
 
   useEffect(() => {
     fetch(url)
@@ -25,5 +27,26 @@ export default function AllCharacters() {
     return ListOfChars;
   }
 
-  return <ul>{renderCharacters()}</ul>;
+  function loadMoreCharactersOnClick() {
+    const urlPage = `https://rickandmortyapi.com/api/character/?page=${page}`;
+    fetch(urlPage)
+      .then((res) => res.json())
+      .then((data) => {
+        const moreCharacters = [...characters, ...data.results];
+        setCharacters(moreCharacters);
+      });
+    return setPage(page + 1);
+  }
+
+  return (
+    <div>
+      <ul>{renderCharacters()}</ul>
+      <button
+        className="backButton"
+        onClick={() => loadMoreCharactersOnClick()}
+      >
+        Load More
+      </button>
+    </div>
+  );
 }
