@@ -1,14 +1,29 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function AllCharacters() {
-  return (
-    <ul>
-      <li>
-        <Link to="/onecharacter">Char1</Link>
-      </li>
-      <li>
-        <Link to="/onecharacter">Char2</Link>
-      </li>
-    </ul>
-  );
+  const url = "https://rickandmortyapi.com/api/character";
+  const [characters, setCharacters] = useState([]);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setCharacters(data.results));
+  }, []);
+
+  function renderCharacters() {
+    const ListOfChars = characters.map((char) => {
+      return (
+        <li key={char.id}>
+          <img src={char.image} alt={char.name} />
+          <Link to={`/onecharacter/${char.id}`}>
+            <h2>{char.name}</h2>
+          </Link>
+        </li>
+      );
+    });
+    return ListOfChars;
+  }
+
+  return <ul>{renderCharacters()}</ul>;
 }
