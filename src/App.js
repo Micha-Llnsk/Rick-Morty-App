@@ -19,9 +19,9 @@ function App() {
             <NavLink to="/allcharacters">Characters</NavLink>
           </nav>
         </header>
-        <main>
+        <main className="App__content">
           <Switch>
-            <Route path="/onecharacter">
+            <Route path="/character/:charId">
               <OneCharacter />
             </Route>
             <Route path="/allcharacters">

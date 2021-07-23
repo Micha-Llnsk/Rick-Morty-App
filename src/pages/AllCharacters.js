@@ -16,7 +16,7 @@ export default function AllCharacters() {
       return (
         <li key={char.id}>
           <img src={char.image} alt={char.name} />
-          <Link to={`/onecharacter/${char.id}`}>
+          <Link to={`/character/${char.id}`}>
             <h2>{char.name}</h2>
           </Link>
         </li>
