@@ -1,6 +1,7 @@
 import "./OneCharacter.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "./AllCharacters.css";
 
 export default function AllCharacters() {
   const url = "https://rickandmortyapi.com/api/character";
@@ -16,7 +17,7 @@ export default function AllCharacters() {
   function renderCharacters() {
     const ListOfChars = characters.map((char) => {
       return (
-        <li key={char.id}>
+        <li className="App__List--Item" key={char.id}>
           <img src={char.image} alt={char.name} />
           <Link to={`/character/${char.id}`}>
             <h2>{char.name}</h2>
@@ -39,8 +40,8 @@ export default function AllCharacters() {
   }
 
   return (
-    <div>
-      <ul>{renderCharacters()}</ul>
+    <div className="App__List--Content">
+      <ul className="App__List">{renderCharacters()}</ul>
       <button
         className="backButton"
         onClick={() => loadMoreCharactersOnClick()}

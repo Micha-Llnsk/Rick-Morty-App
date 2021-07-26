@@ -1,0 +1,26 @@
+.App__head {
+  display: flex;
+  justify-content: space-between;
+  background: green;
+  height: 100%;
+}
+
+img.App__logo {
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+}
+
+.App__nav {
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2em;
+  font-weight: 900;
+  text-shadow: 1px 1px yellow;
+}
+
+.App__nav:active {
+  color: red;
+}

@@ -1,0 +1,19 @@
+.App__List--Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App__List {
+  display: flex;
+  flex-direction: column;
+}
+
+.App__List--Item {
+  margin: 20px;
+}
+
+.App__List--Item img {
+  border: 3px #04b1c5 double;
+  padding: 10px;
+}
