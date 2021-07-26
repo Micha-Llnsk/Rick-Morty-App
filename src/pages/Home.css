@@ -1,0 +1,12 @@
+.App__homeImage {
+  max-width: 100%;
+  height: auto;
+  padding: 20px;
+}
+
+.App__homeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  text-align: center;
+}

@@ -1,10 +1,15 @@
-import Pickle from "../images/pickle-rick-react-cover.png";
+import portal from "../images/fun_portal_rick_and_morty.jpg";
+import "./Home.css";
 
 export default function Home() {
   return (
-    <section>
+    <section className="App__homeContent">
       <h1>Welcome to the Rick and Morty App = )</h1>
-      <img src={Pickle} alt="Pickle Rick for react App" />
+      <img
+        className="App__homeImage"
+        src={portal}
+        alt="Rick and Morty fighting their out of a portal"
+      />
       <p>Done with love by Micha</p>
     </section>
   );
