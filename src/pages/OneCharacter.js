@@ -24,12 +24,26 @@ export default function OneCharacter() {
     if (isLoading || character === null) {
       return "Loading...";
     }
-
+    
     const { name, image, status, species, type, gender, origin, location } =
       character;
+      
+      let statusClass;
+      switch (status) {
+        case "Alive":
+          statusClass = "CharCard--alive";
+          break;
+          case "Dead":
+            statusClass = "CharCard--dead";
+            break;
+            default:
+              statusClass = "CharCard--unknown";
+              break;
+            }
+            
 
     return (
-      <section className="char__card">
+      <section className={`char__card ${statusClass}`}>
         <h2>{name}</h2>
         <img src={image} alt={name} />
         <p>Status: {status}</p>
