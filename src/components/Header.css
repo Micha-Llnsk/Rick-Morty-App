@@ -1,26 +1,99 @@
 .App__head {
   display: flex;
   justify-content: space-between;
-  background: green;
-  height: 100%;
+  justify-items: center;
+  background: #1072c9;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 25%);
 }
 
 img.App__logo {
-  height: auto;
+  max-height: 200px;
   width: 100%;
-  max-width: 200px;
+  max-width: 250px;
 }
 
 .App__nav {
   display: flex;
-  padding: 1rem;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.2em;
-  font-weight: 900;
-  text-shadow: 1px 1px yellow;
+  margin: 0.4em;
 }
 
-.App__nav:active {
-  color: red;
+.dropdown-btn {
+  display: none;
+}
+
+.dropdown-content {
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  font-size: 2em;
+  gap: 0.2em;
+}
+
+.dropdown-item {
+  padding: 0.4em;
+}
+
+.dropdown-item:hover {
+  color: white;
+  background: #04b1c5;
+  padding: 0.4em;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.selected {
+  color: white;
+  background: #04b1c5;
+  border-radius: 8px;
+}
+
+@media all and (max-width: 700px) {
+
+  .App__head {
+    position: relative;
+  }
+
+  .App__nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-self: center;
+    margin: 0.4em;
+  }
+
+  .dropdown-btn {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 900;
+    padding: 0.4em;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    display: none;
+  }
+
+  .dropdown-item {
+    display: block;
+    float: none;
+    background: #1072c9;
+  }
+
+  .dropdown-item:hover {
+    border-radius: unset;
+  }
+
+  .App__nav:hover .dropdown-content {
+    display: block;
+    right: 0;
+    top: 9vh;
+    width: 100%;
+  }
+
+  .selected {
+    border-radius: unset;
+  }
 }
