@@ -10,11 +10,9 @@
 }
 
 .App {
-  display: grid;
-  grid-template-rows: 10vh auto 10vh;
   height: 100vh;
   align-items: center;
-  background-color: #111440;
+  background-color: #dae8e6;
   overflow-y: scroll;
 }
 
