@@ -16,11 +16,29 @@ export default function AllCharacters() {
 
   function renderCharacters() {
     const ListOfChars = characters.map((char) => {
+
+      let statusClass;
+      switch (char.status) {
+        case "Alive":
+          statusClass = "CharCard--alive";
+          break;
+          case "Dead":
+            statusClass = "CharCard--dead";
+            break;
+            default:
+              statusClass = "CharCard--unknown";
+              break;
+            }
+
       return (
-        <li className="App__List--Item" key={char.id}>
-          <img src={char.image} alt={char.name} />
-          <Link to={`/character/${char.id}`}>
-            <h2>{char.name}</h2>
+        <li className={`List__Item--Wrap ${statusClass}`} key={char.id}>
+          <Link className="List__Item" to={`/character/${char.id}`}>
+            <img src={char.image} alt={char.name} />
+            <div className="List__Item--Text">
+              <h2>{char.name}</h2>
+              <p>Status: {char.status}</p>
+              <p>Species: {char.species}</p>
+            </div>
           </Link>
         </li>
       );
@@ -40,8 +58,8 @@ export default function AllCharacters() {
   }
 
   return (
-    <div className="App__List--Content">
-      <ul className="App__List">{renderCharacters()}</ul>
+    <div className="App__List--Wrapper">
+      <ul className="App__List--Content">{renderCharacters()}</ul>
       <button
         className="backButton"
         onClick={() => loadMoreCharactersOnClick()}
