@@ -4,19 +4,51 @@ import { useState, useEffect } from "react";
 import "./AllCharacters.css";
 
 export default function AllCharacters() {
-  const url = "https://rickandmortyapi.com/api/character";
-  const [characters, setCharacters] = useState([]);
-  const [page, setPage] = useState(2);
+  const [resources, setResources] = useState([]);
+  const [totalPages, setTotalPages] = useState();
+
+  const [filterObject, setFilterObject] = useState({
+    status: "",
+    gender: "",
+    name: "",
+    page: 1,
+  });
+
+  const [reloadDataSet, setReloadDataSet] = useState(true);
+  const apiBaseUri = "https://rickandmortyapi.com/api/character";
+
+
+  function compileApiUri(baseUrl, filterObject) {
+    let apiFilterParams = new URLSearchParams({});
+    Object.entries(filterObject).forEach((filter) => {
+      if (filter && filter[1]) {
+        apiFilterParams.append(filter[0], filter[1]);
+      }
+    });
+  return apiFilterParams.toString() ? baseUrl + "/?" + apiFilterParams.toString() : baseUrl;
+}
+
 
   useEffect(() => {
-    fetch(url)
+    fetch(compileApiUri(apiBaseUri, filterObject))
       .then((res) => res.json())
-      .then((data) => setCharacters(data.results));
-  }, []);
+      .then((data) => {
+        setResources((prevResources) => {
+          if (reloadDataSet) {
+            setReloadDataSet(false);
+            return data?.results || [];
+          } else {
+            return [...prevResources, ...(data?.results || [])];
+          }
+        });
+        setTotalPages(data?.info?.pages || 1);
+      })
+      .catch((error) => console.log(error));
+  }, [filterObject]);
+
 
   function renderCharacters() {
-    const ListOfChars = characters.map((char) => {
-
+    const ListOfChars = resources.map((char) => {
       let statusClass;
       switch (char.status) {
         case "Alive":
@@ -29,7 +61,6 @@ export default function AllCharacters() {
               statusClass = "CharCard--unknown";
               break;
             }
-
       return (
         <li className={`List__Item--Wrap ${statusClass}`} key={char.id}>
           <Link className="List__Item" to={`/character/${char.id}`}>
@@ -37,7 +68,7 @@ export default function AllCharacters() {
             <div className="List__Item--Text">
               <h2>{char.name}</h2>
               <p>Status: {char.status}</p>
-              <p>Species: {char.species}</p>
+              <p>Gender: {char.gender}</p>
             </div>
           </Link>
         </li>
@@ -46,26 +77,51 @@ export default function AllCharacters() {
     return ListOfChars;
   }
 
-  function loadMoreCharactersOnClick() {
-    const urlPage = `https://rickandmortyapi.com/api/character/?page=${page}`;
-    fetch(urlPage)
-      .then((res) => res.json())
-      .then((data) => {
-        const moreCharacters = [...characters, ...data.results];
-        setCharacters(moreCharacters);
-      });
-    return setPage(page + 1);
+  function handleLoadMore() {
+    if (filterObject.page < totalPages) {
+      setFilterObject({...filterObject, page: filterObject.page + 1 });
+    }
+  }
+
+  function handleFilterInputChange(e) {
+    setFilterObject({
+      ...filterObject,
+      [e.target.name]: e.target.value,
+      page: 1,
+    });
+    setReloadDataSet(true);
   }
 
   return (
-    <div className="App__List--Wrapper">
+  <div className="App__List--Wrapper">
+    <div className="search__wrap">
+    <form className="search__form">
+      <select id="status-filter" className="form--item" name="status" onChange={handleFilterInputChange}>
+        <option value="">-- STATUS --</option>
+        <option value="alive">ALIVE</option>
+        <option value="dead">DEAD</option>
+        <option value="unknown">UNKNOWN</option>
+      </select>
+      <select id="gender-filter" className="form--item" name="gender" onChange={handleFilterInputChange}>
+        <option value="">-- GENDER --</option>
+        <option value="female">FEMALE</option>
+        <option value="male">MALE</option>
+        <option value="unknown">UNKNOWN</option>
+        <option value="genderless">GENDERLESS</option>
+      </select>
+      <input id="name-filter" className="form--item" type="text" name="name" onChange={handleFilterInputChange} placeholder="CHARACTER NAME" />
+    </form>
+    </div>
+
       <ul className="App__List--Content">{renderCharacters()}</ul>
+      {filterObject.page < totalPages && (
       <button
         className="backButton"
-        onClick={() => loadMoreCharactersOnClick()}
+        onClick={() => handleLoadMore()}
       >
         Load More
       </button>
-    </div>
+      )}
+  </div>
   );
 }
