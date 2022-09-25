@@ -1,7 +1,7 @@
 .App__List--Wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 1800px;
+  max-width: 1600px;
   margin: 20px;
   align-items: center;
 }
@@ -55,4 +55,57 @@
   background: rgba(50, 50, 50, 0.7);
   width: 100%;
   text-align: center;
+}
+
+.search__wrap {
+  background: #1072c9;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 25%);
+  border-radius: 8px;;
+  padding: 30px;
+  gap: 10px;
+  width: 100%;
+}
+
+.search__form {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  width: 100%;
+  letter-spacing: 0.2em;
+}
+
+.form--item {
+  background-color: white;
+  border: 1px solid #04b1c5;
+  border-radius: 5px;
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  width: 32%;
+  color: black;
+  padding: 0.3em 1em;
+}
+
+.form--item:focus {
+  border: 2px solid #094477;
+}
+
+@media all and (max-width: 700px) {
+
+.search__wrap {
+  padding: 10px;
+}
+
+.search__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.form--item {
+  width: 100%;
+  justify-content: center;
+}
+
 }
