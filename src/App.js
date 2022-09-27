@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import AllCharacters from "./pages/AllCharacters";
 import OneCharacter from "./pages/OneCharacter";
 import Header from "./components/Header";
+import FavCharacters from "./pages/FavCharacters";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
             </Route>
             <Route path="/allcharacters">
               <AllCharacters />
+            </Route>
+            <Route path="/favs">
+              <FavCharacters />
             </Route>
             <Route exact path="/">
               <Home />
