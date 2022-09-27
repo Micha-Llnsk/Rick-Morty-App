@@ -7,6 +7,20 @@
   margin: 1rem;
 }
 
+.flex {
+  display:flex;
+  flex-direction: column;
+}
+
+.char__icon {
+  align-self: center;
+  cursor: pointer;
+}
+
+.active path {
+  fill: yellow;
+}
+
 .backButton {
   all: unset;
   border-radius: 5px;
