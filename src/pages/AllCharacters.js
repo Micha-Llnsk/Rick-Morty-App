@@ -44,6 +44,7 @@ export default function AllCharacters() {
         setTotalPages(data?.info?.pages || 1);
       })
       .catch((error) => console.log(error));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterObject]);
 
 
